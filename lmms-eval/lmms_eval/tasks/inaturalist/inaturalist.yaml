@@ -1,0 +1,20 @@
+dataset_path: Jessemel/inaturalist-llava-eval-natural
+dataset_kwargs:
+  token: True
+task: "inaturalist"
+test_split: train
+output_type: generate_until
+doc_to_visual: !function utils.inaturalist_doc_to_visual
+doc_to_text: !function utils.inaturalist_doc_to_text
+doc_to_target: !function utils.inaturalist_doc_to_target
+generation_kwargs:
+  max_new_tokens: 16
+  temperature: 0
+  do_sample: false
+process_results: !function utils.inaturalist_process_results
+metric_list:
+  - metric: inat_accuracy
+    aggregation: mean
+    higher_is_better: true
+metadata:
+  version: 1.0

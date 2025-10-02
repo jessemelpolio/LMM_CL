@@ -1,0 +1,23 @@
+dataset_path: Jessemel/cub200-test  # Change to your actual HuggingFace repo ID
+task: "cub200"
+test_split: train
+output_type: generate_until
+doc_to_visual: !function utils.cub200_doc_to_visual
+doc_to_text: !function utils.cub200_doc_to_text
+doc_to_target: !function utils.cub200_doc_to_target
+generation_kwargs:
+  max_new_tokens: 16
+  temperature: 0
+  top_p: 1.0
+  num_beams: 1
+  do_sample: false
+process_results: !function utils.cub200_process_results
+metric_list:
+  - metric: acc
+    higher_is_better: true
+lmms_eval_specific_kwargs:
+  default:
+    pre_prompt: ""
+    post_prompt: "Answer with the option's letter from the given choices directly."
+metadata:
+  version: 0.0 

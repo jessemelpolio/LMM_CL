@@ -1,0 +1,19 @@
+dataset_path: json
+dataset_name: /work/nvme/bcgq/zhenzhu/data/llava_data/inaturalist_full/inaturalist_val_mc26.json
+task: "inaturalist_mc_local"
+output_type: generate_until
+doc_to_visual: !function utils.inaturalist_mc_doc_to_visual
+doc_to_text: !function utils.inaturalist_mc_doc_to_text
+doc_to_target: !function utils.inaturalist_mc_doc_to_target
+generation_kwargs:
+  max_new_tokens: 1
+  temperature: 0
+  do_sample: false
+process_results: !function utils.inaturalist_mc_process_results
+metric_list:
+  - metric: inat_mc_accuracy
+    aggregation: mean
+    higher_is_better: true
+metadata:
+  version: 2.0
+  description: "iNaturalist 2021 full dataset (100k validation samples) - local evaluation without HF"

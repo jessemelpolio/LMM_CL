@@ -1,0 +1,24 @@
+dataset_path: Jessemel/clockreading-openimg
+task: "openimgclock"
+test_split: train  # HuggingFace datasets default to 'train' split when loading from disk
+output_type: generate_until
+doc_to_visual: !function utils.openimgclock_doc_to_visual
+doc_to_text: !function utils.openimgclock_doc_to_text
+doc_to_target: !function utils.openimgclock_doc_to_target
+generation_kwargs:
+  max_new_tokens: 32
+  temperature: 0
+  top_p: 1.0
+  num_beams: 1
+  do_sample: false
+process_results: !function utils.openimgclock_process_results
+metric_list:
+  - metric: hour_accuracy
+  - metric: minute_accuracy
+  - metric: both_accuracy
+lmms_eval_specific_kwargs:
+  default:
+    pre_prompt: ""
+    post_prompt: "\nAnswer with the time in HH:MM format. For example, if it's 3:45, output 3:45."
+metadata:
+  version: 0.0 

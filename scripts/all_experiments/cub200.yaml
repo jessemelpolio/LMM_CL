@@ -1,0 +1,5 @@
+datasets:
+- json_path: /work/nvme/bcgq/zhenzhu/data/llava_data/cub200/cub200_train.json
+  sampling_strategy: "all"
+  # "all"
+  # first:10%
