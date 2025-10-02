@@ -125,8 +125,6 @@ Here is an overview of the key directories in this project:
 
 If you find our work useful for your research, please cite:
 
-Zhen Zhu, Yiming Gong, Yao Xiao, Yaoyao Liu, and Derek Hoiem. "How To Teach Large Multimodal Models New Skills?" University of Illinois at Urbana-Champaign. (Work done at UIUC.)
-
 BibTeX:
 ```bibtex
 @article{zhu2025teachlmm,
