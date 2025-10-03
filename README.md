@@ -15,10 +15,43 @@ This repository accompanies our study on how to teach Large Multimodal Models (L
 - **Flexible Data Handling:** Utilities to fetch/convert datasets into the required format.
 - **Analysis Tools:** Scripts to probe output‑distribution shift and aggregate evaluation results.
 
+## Quick Start with Minimal Codes to Select What You Train
+
+We developed that only tuning the SA Proj. or MLP Gate&Up are effective for adapting large multimodal models with minimal forgetting. You can do this in just a few lines by filtering parameter names. Example:
+
+```python
+# 1) Freeze everything first
+for p in model.parameters():
+    p.requires_grad = False
+
+# 2a) Unfreeze ONLY self-attention projections (SA Proj.) in the LLM
+sa_keys = (
+    "self_attn.q_proj", "self_attn.k_proj", "self_attn.v_proj", "self_attn.o_proj"
+)
+for name, p in model.named_parameters():
+    if any(k in name for k in sa_keys):
+        p.requires_grad = True
+
+# 2b) (Alternative) Unfreeze ONLY MLP Gate & Up; keep Down frozen
+# Comment-out 2a and use this block instead
+gate_up_keys = ("mlp.gate_proj", "mlp.up_proj")
+down_keys    = ("mlp.down_proj")
+for name, p in model.named_parameters():
+    if any(k in name for k in gate_up_keys):
+        p.requires_grad = True
+    elif any(k in name for k in down_keys):
+        p.requires_grad = False  # explicit for clarity
+
+# ... proceed to wrap with your Trainer/optimizer, etc.
+```
+
+Tip: The built‑in flags shown above implement the same logic internally and are robust across model families. Use the snippet when you want to prototype custom selections inline.
+
 ## Table of Contents
 
 - [How To Teach Large Multimodal Models New Skills?](#how-to-teach-large-multimodal-models-new-skills)
   - [Features](#features)
+  - [Quick Start with Minimal Codes to Select What You Train](#quick-start-with-minimal-codes-to-select-what-you-train)
   - [Table of Contents](#table-of-contents)
   - [Installation](#installation)
   - [Dataset Preparation](#dataset-preparation)
