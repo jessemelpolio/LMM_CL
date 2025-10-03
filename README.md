@@ -53,7 +53,7 @@ This repository accompanies our study on how to teach Large Multimodal Models (L
     - Alternatively, you can start from the provided environment spec and then install the packages above:
       ```bash
       conda env create -f environment.yaml
-      conda activate llava   # environment name from the YAML
+      conda activate lmm_cl   # environment name from the YAML
       pip install -e ".[train]" && pip install -e ./lmms-eval
       ```
 
