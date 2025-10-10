@@ -163,7 +163,7 @@ BibTeX:
 @article{zhu2025teachlmm,
   title  = {How To Teach Large Multimodal Models New Skills?},
   author = {Zhu, Zhen and Gong, Yiming and Xiao, Yao and Liu, Yaoyao and Hoiem, Derek},
-  journal = {arXiv preprint arXiv:2509.19382},
+  journal = {https://arxiv.org/abs/2510.08564},
   year   = {2025}
 }
 ```
